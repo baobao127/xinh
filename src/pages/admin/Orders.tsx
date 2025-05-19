@@ -1,12 +1,30 @@
 import React, { useEffect, useState } from 'react';
+import ConfirmDialog from '@/components/ui/ConfirmDialog';
 
 const Orders: React.FC = () => {
   const [orders, setOrders] = useState<any[]>([]);
+  const [showDialog, setShowDialog] = useState(false);
+  const [selectedIndex, setSelectedIndex] = useState<number | null>(null);
 
   useEffect(() => {
     const stored = localStorage.getItem('orders');
     if (stored) setOrders(JSON.parse(stored));
   }, []);
+
+  const handleDelete = (index: number) => {
+    setSelectedIndex(index);
+    setShowDialog(true);
+  };
+
+  const confirmDelete = () => {
+    if (selectedIndex === null) return;
+    const newOrders = [...orders];
+    newOrders.splice(selectedIndex, 1);
+    setOrders(newOrders);
+    localStorage.setItem('orders', JSON.stringify(newOrders));
+    setShowDialog(false);
+    setSelectedIndex(null);
+  };
 
   return (
     <div>
@@ -20,11 +38,19 @@ const Orders: React.FC = () => {
               <p><strong>Khách:</strong> {order.name}</p>
               <p><strong>Địa chỉ:</strong> {order.address}</p>
               <p><strong>Thanh toán:</strong> {order.paymentMethod}</p>
-              <p><strong>SL sản phẩm:</strong> {order.items.length}</p>
-              <p className="text-sm text-gray-500">Thời gian: {order.createdAt}</p>
+              <button onClick={() => handleDelete(i)} className="text-red-500 mt-2 hover:underline">
+                Xóa đơn
+              </button>
             </li>
           ))}
         </ul>
+      )}
+      {showDialog && (
+        <ConfirmDialog
+          message="Bạn chắc chắn muốn xóa đơn hàng này?"
+          onConfirm={confirmDelete}
+          onCancel={() => setShowDialog(false)}
+        />
       )}
     </div>
   );
