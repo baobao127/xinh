@@ -10,14 +10,21 @@ const mockProducts = [
     description: 'Đầm ôm body ngắn tay, chất vải co giãn thoải mái, tôn dáng.',
     rating: 4.5,
   },
-  // Thêm sp khác nếu muốn
+  {
+    id: '2',
+    name: 'Áo khoác dù basic',
+    price: 199000,
+    image: 'https://via.placeholder.com/300x400?text=Áo+khoác',
+    description: 'Áo khoác gió basic, dễ phối đồ, chống nắng nhẹ.',
+    rating: 4.2,
+  },
 ];
 
 const ProductDetail: React.FC = () => {
   const { id } = useParams();
   const product = mockProducts.find((p) => p.id === id);
 
-  if (!product) return <p>Sản phẩm không tồn tại</p>;
+  if (!product) return <p className="p-4">Sản phẩm không tồn tại</p>;
 
   return (
     <div className="max-w-4xl mx-auto p-6 flex flex-col md:flex-row gap-6">
