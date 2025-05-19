@@ -2,29 +2,43 @@ import React from 'react';
 import { Routes, Route } from 'react-router-dom';
 
 import Layout from '@/components/layout/Layout';
-import NotFound from '@/pages/NotFound';
+import AdminLayout from '@/components/layout/AdminLayout';
+
+import Home from '@/pages/Home';
+import Cart from '@/pages/Cart';
 import Checkout from '@/pages/Checkout';
 import Success from '@/pages/Success';
-import Cart from '@/pages/Cart';
-import Home from '@/pages/Home';
+import NotFound from '@/pages/NotFound';
 
-// Admin
+import Products from '@/pages/Products';
+import ProductsView from '@/pages/ProductsView';
+import ProductDetail from '@/pages/ProductDetail';
+
 import AdminProducts from '@/pages/admin/Products';
 import ProductsEditor from '@/pages/admin/ProductsEditor';
+import Orders from '@/pages/admin/Orders';
+import Settings from '@/pages/admin/Settings';
 
 const AppRoutes: React.FC = () => {
   return (
     <Routes>
       <Route path="/" element={<Layout />}>
         <Route index element={<Home />} />
+        <Route path="products" element={<Products />} />
+        <Route path="all-products" element={<ProductsView />} />
+        <Route path="product/:id" element={<ProductDetail />} />
         <Route path="cart" element={<Cart />} />
         <Route path="checkout" element={<Checkout />} />
         <Route path="success" element={<Success />} />
         <Route path="*" element={<NotFound />} />
       </Route>
 
-      <Route path="/admin/products" element={<AdminProducts />} />
-      <Route path="/admin/product-editor" element={<ProductsEditor />} />
+      <Route path="/admin" element={<AdminLayout />}>
+        <Route path="products" element={<AdminProducts />} />
+        <Route path="product-editor" element={<ProductsEditor />} />
+        <Route path="orders" element={<Orders />} />
+        <Route path="settings" element={<Settings />} />
+      </Route>
     </Routes>
   );
 };
