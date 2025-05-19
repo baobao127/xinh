@@ -1,8 +1,16 @@
 import React from 'react';
 import AppRoutes from './AppRoutes';
+import { useToast } from '@/hooks/use-toast';
 
-const App: React.FC = () => {
-  return <AppRoutes />;
-};
+function App() {
+  const { Toast } = useToast();
+
+  return (
+    <>
+      <AppRoutes />
+      <Toast />
+    </>
+  );
+}
 
 export default App;
