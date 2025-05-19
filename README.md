@@ -1,13 +1,7 @@
-## Running React on Replit
+# Xinh Style - React TypeScript E-commerce Demo
 
-[React](https://reactjs.org/) is a popular JavaScript library for building user interfaces.
+Đây là một dự án demo frontend mini cho shop thời trang nữ, dùng React + TypeScript + Tailwind CSS + Vite.
 
-[Vite](https://vitejs.dev/) is a blazing fast frontend build tool that includes features like Hot Module Reloading (HMR), optimized builds, and TypeScript support out of the box.
+---
 
-Using the two in conjunction is one of the fastest ways to build a web app.
-
-### Getting Started
-- Hit run
-- Edit [App.tsx](#src/App.tsx) and watch it live update!
-
-By default, Replit runs the `dev` script, but you can configure it by changing the `run` field in the [configuration file](#.replit). Here are the vite docs for [serving production websites](https://vitejs.dev/guide/build.html)
+## Cấu trúc dự án
