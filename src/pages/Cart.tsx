@@ -70,4 +70,5 @@ const CartPage: React.FC = () => {
 };
 
 <OrderStatus />
+{!cart.length && <BackToShopBanner />}
 export default CartPage;
