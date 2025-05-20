@@ -3,6 +3,7 @@ import clsx from 'clsx';
 
 const fakeUsers = ['Lan', 'Hùng', 'Tý', 'My', 'Tuấn', 'Hà', 'Ngọc', 'Trung', 'Thảo'];
 const fakeCities = ['Hà Nội', 'TP.HCM', 'Đà Nẵng', 'Cần Thơ', 'Hải Phòng'];
+const fakeLocations = ['Hà Nội', 'TP.HCM', 'Đà Nẵng', 'Cần Thơ', 'Hải Phòng'];
 const fakeProducts = [
   'Đầm maxi đỏ', 'Áo sơ mi tay phồng', 'Váy công sở caro', 'Quần baggy kèm belt',
   'Set vest 2 dây', 'Áo hoodie freesize', 'Chân váy ngắn lưng cao'
@@ -12,19 +13,26 @@ const getRandom = (arr: string[]) => arr[Math.floor(Math.random() * arr.length)]
 
 const FakePurchasePopup: React.FC = () => {
   const [visible, setVisible] = useState(false);
+  const [show, setShow] = useState(false);
+  const [content, setContent] = useState('');
   const [popupText, setPopupText] = useState('');
 
   useEffect(() => {
-    const timeout = setTimeout(() => {
+    const timer = setTimer(() => {
+      const product = getRandom(fakeProducts);
+      const city = getRandom(fakeLocations);
       const text = `${getRandom(fakeUsers)} ở ${getRandom(fakeCities)} vừa mua ${getRandom(fakeProducts)}.`;
       setPopupText(text);
+      setContent(`${user} ở ${city} vừa mua ${product}`);
       setVisible(true);
+      setShow(true);
 
       setTimeout(() => setVisible(false), 6000);
     }, 15000 + Math.random() * 30000); // delay ngẫu nhiên 15s–45s
 
-    return () => clearTimeout(timeout);
+    return () => clearTimeout(timer);
   }, [visible]);
+    if (!show) return null;
 
   return (
     <div className={clsx(
