@@ -15,6 +15,7 @@ const Layout: React.FC = () => {
       <Footer />
       <PopupNotifier />
       <ScrollToTopButton />
+      <FakePurchasePopup />
     </>
   );
 };
