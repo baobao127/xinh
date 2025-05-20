@@ -2,6 +2,7 @@ import React from 'react';
 import Header from './Header';
 import Footer from './Footer';
 import { Outlet } from 'react-router-dom';
+import PopupNotifier from '@/components/PopupNotifier';
 
 const Layout: React.FC = () => {
   return (
@@ -11,6 +12,7 @@ const Layout: React.FC = () => {
         <Outlet />
       </main>
       <Footer />
+      <PopupNotifier />
     </>
   );
 };
