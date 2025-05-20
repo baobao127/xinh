@@ -1,56 +1,41 @@
-import React from 'react';
-import { useParams } from 'react-router-dom';
-
-const mockProducts = [
-  {
-    id: '1',
-    name: 'Đầm ôm body ngắn tay',
-    price: 220000,
-    image: 'https://via.placeholder.com/300x400?text=Đầm+ôm',
-    description: 'Đầm ôm body ngắn tay, chất vải co giãn thoải mái, tôn dáng.',
-    rating: 4.5,
-  },
-  {
-    id: '2',
-    name: 'Áo khoác dù basic',
-    price: 199000,
-    image: 'https://via.placeholder.com/300x400?text=Áo+khoác',
-    description: 'Áo khoác gió basic, dễ phối đồ, chống nắng nhẹ.',
-    rating: 4.2,
-  },
-];
+import React, { useEffect, useState } from 'react';
+import { useParams, useNavigate } from 'react-router-dom';
+import { useCart } from '@/context/CartContext';
+import { fetchProducts } from '@/lib/fakeApi';
 
 const ProductDetail: React.FC = () => {
-  const { id } = useParams();
-  const product = mockProducts.find((p) => p.id === id);
+  const { id } = useParams<{ id: string }>();
+  const navigate = useNavigate();
+  const { addToCart } = useCart();
+  const [product, setProduct] = useState<any>(null);
 
-  if (!product) return <p className="p-4">Sản phẩm không tồn tại</p>;
+  useEffect(() => {
+    fetchProducts().then((data) => {
+      const found = data.find((item: any) => String(item.id) === id);
+      if (!found) {
+        navigate('/'); // fallback nếu ko tìm thấy
+      } else {
+        setProduct(found);
+      }
+    });
+  }, [id]);
+
+  if (!product) return <p className="p-4 text-center">Đang tải sản phẩm...</p>;
+
+  const handleAdd = () => {
+    addToCart({ ...product, quantity: 1 });
+    alert('Đã thêm vào giỏ!');
+  };
 
   return (
-    <div className="max-w-4xl mx-auto p-6 flex flex-col md:flex-row gap-6">
-      <div className="w-full md:w-1/2">
-        <img
-          src={product.image}
-          alt={product.name}
-          className="rounded shadow-lg hover:scale-105 transition-transform duration-300"
-        />
-      </div>
-      <div className="w-full md:w-1/2 space-y-4">
-        <h2 className="text-2xl font-bold">{product.name}</h2>
-        <p className="text-xl text-red-600">{product.price.toLocaleString()}đ</p>
-        <p>{product.description}</p>
-        <div>
-          Đánh giá:{' '}
-          <span className="text-yellow-500">
-            {'★'.repeat(Math.floor(product.rating))}
-            {'☆'.repeat(5 - Math.floor(product.rating))}
-          </span>{' '}
-          ({product.rating}/5)
-        </div>
-        <button className="bg-blue-600 text-white px-4 py-2 rounded hover:bg-blue-700">
-          Thêm vào giỏ
-        </button>
-      </div>
+    <div className="p-4 max-w-2xl mx-auto">
+      <img src={product.image} alt={product.name} className="w-full h-64 object-cover rounded mb-4" />
+      <h2 className="text-2xl font-bold">{product.name}</h2>
+      <p className="text-gray-600 mb-2">{product.description || 'Không có mô tả'}</p>
+      <p className="text-lg font-semibold mb-4">{product.price} đ</p>
+      <button onClick={handleAdd} className="bg-black text-white px-4 py-2 rounded">
+        Thêm vào giỏ
+      </button>
     </div>
   );
 };
