@@ -51,5 +51,7 @@ const Home: React.FC = () => {
     </div>
   );
 };
-
+{loading
+  ? Array.from({ length: 8 }).map((_, i) => <SkeletonProduct key={i} />)
+  : products.map(...) }
 export default Home;
