@@ -8,6 +8,15 @@ import SpinToWin from '@/components/SpinToWin';
 import MiniGameWheel from '@/components/MiniGameWheel';
 
 const Home: React.FC = () => {
+  const { message, visible, showToast } = useToast();
+
+...
+
+<button onClick={() => showToast('Đã thêm vào giỏ hàng!')}>
+  Mua ngay
+</button>
+
+<PopupToast message={message} visible={visible} />
   const [products, setProducts] = useState<any[]>([]);
   const [loading, setLoading] = useState(true);
   const [quickProduct, setQuickProduct] = useState<any | null>(null);
