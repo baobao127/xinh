@@ -28,11 +28,11 @@ const Home: React.FC = () => {
         {loading
           ? Array.from({ length: 8 }).map((_, i) => <SkeletonProduct key={i} />)
           : products.map((p) => (
-              <div key={p.id} className="border rounded p-2 hover:shadow transition">
+              <Link to={`/product/${p.id}`} key={p.id} className="border rounded p-2 hover:shadow transition block">
                 <img src={p.image} className="w-full h-32 object-cover mb-2 rounded" alt={p.name} />
                 <h3 className="text-sm font-semibold">{p.name}</h3>
-                <p className="text-xs text-gray-500">{p.price} đ</p>
-              </div>
+                <p className="text-xs text-gray-500">{p.price.toLocaleString()} đ</p>
+              </Link>
             ))}
       </div>
     </div>
