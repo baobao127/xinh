@@ -1,4 +1,16 @@
 import { useState } from 'react';
+import React from 'react';
+
+const PopupToast = ({ message, visible }: { message: string, visible: boolean }) => {
+  if (!visible) return null;
+  return (
+    <div className="fixed bottom-10 right-4 bg-black text-white px-4 py-2 rounded shadow z-50">
+      {message}
+    </div>
+  );
+};
+
+
 
 export const useToast = () => {
   const [toast, setToast] = useState<string | null>(null);
