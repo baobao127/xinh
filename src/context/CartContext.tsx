@@ -1,5 +1,14 @@
 import React, { createContext, useContext, useEffect, useState } from 'react';
+import Toast from '@/components/Toast';
 
+const [toastMsg, setToastMsg] = useState('');
+
+const handleAddToCart = () => {
+  // logic thêm vào giỏ
+  setToastMsg('Đã thêm vào giỏ hàng nhen!');
+};
+
+{toastMsg && <Toast message={toastMsg} onClose={() => setToastMsg('')} />}
 const CartContext = createContext<any>(null);
 
 document.getElementById('cart-icon')?.classList.add('animate-shake');
