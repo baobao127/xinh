@@ -19,6 +19,7 @@ import ProductsEditor from '@/pages/admin/ProductsEditor';
 import AdminOrders from '@/pages/admin/AdminOrders';
 import Settings from '@/pages/admin/Settings';
 import AdminSettings from '@/pages/admin/AdminSettings';
+import UnlockAdmin from '@/components/UnlockAdmin';
 import DiscountUnlock from '@/pages/DiscountUnlock';
 
 const AppRoutes: React.FC = () => {
@@ -34,6 +35,7 @@ const AppRoutes: React.FC = () => {
         <Route path="success" element={<Success />} />
         <Route path="*" element={<NotFound />} />
       </Route>
+      <Route path="/unlock" element={<UnlockAdmin />} />
       <Route path="/unlock" element={<DiscountUnlock />} />
       <Route path="/admin/orders" element={<AdminOrders />} />
       <Route path="/admin/settings" element={<AdminSettings />} />
