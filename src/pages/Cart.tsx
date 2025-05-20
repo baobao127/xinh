@@ -1,7 +1,15 @@
 import React from 'react';
 import { useCart } from '@/context/CartContext';
 import { Link } from 'react-router-dom';
+const { message, visible, showToast } = useToast();
 
+...
+
+<button onClick={() => showToast('Đã thêm vào giỏ hàng!')}>
+  Mua ngay
+</button>
+
+<PopupToast message={message} visible={visible} />
 const CartPage: React.FC = () => {
   const { cart, removeFromCart, updateQuantity } = useCart();
 
