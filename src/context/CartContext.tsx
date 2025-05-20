@@ -2,6 +2,11 @@ import React, { createContext, useContext, useEffect, useState } from 'react';
 
 const CartContext = createContext<any>(null);
 
+document.getElementById('cart-icon')?.classList.add('animate-shake');
+setTimeout(() => {
+  document.getElementById('cart-icon')?.classList.remove('animate-shake');
+}, 300);
+
 export const CartProvider = ({ children }: { children: React.ReactNode }) => {
   const [cart, setCart] = useState<any[]>([]);
 
