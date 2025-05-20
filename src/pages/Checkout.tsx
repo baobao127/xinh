@@ -208,4 +208,93 @@ const Checkout: React.FC = () => {
   );
 };
 
+
+const Checkout: React.FC = () => {
+  const [name, setName] = useState('');
+  const [address, setAddress] = useState('');
+  const [payment, setPayment] = useState('cod');
+  const [submitting, setSubmitting] = useState(false);
+  const navigate = useNavigate();
+
+  useEffect(() => {
+    const cart = JSON.parse(localStorage.getItem('cart') || '[]');
+    if (cart.length === 0) navigate('/cart');
+  }, []);
+
+  const handleSubmit = (e: React.FormEvent) => {
+    e.preventDefault();
+    if (!name || !address) {
+      toast.error('Vui lòng nhập đầy đủ thông tin.');
+      return;
+    }
+
+    setSubmitting(true);
+
+    const order = {
+      id: Date.now(),
+      name,
+      address,
+      paymentMethod: payment,
+      items: JSON.parse(localStorage.getItem('cart') || '[]'),
+      status: payment === 'bank' ? 'waitingBank' : 'processing',
+      createdAt: new Date().toISOString(),
+    };
+
+    const orders = JSON.parse(localStorage.getItem('orders') || '[]');
+    localStorage.setItem('orders', JSON.stringify([...orders, order]));
+    localStorage.removeItem('cart');
+    localStorage.setItem('orderStatus', order.status);
+
+    toast.success('Đặt hàng thành công!');
+    setTimeout(() => navigate('/success'), 1000);
+  };
+
+  return (
+    <div className="max-w-xl mx-auto p-4">
+      <h2 className="text-2xl font-bold mb-4">Thông tin thanh toán</h2>
+      <form onSubmit={handleSubmit} className="space-y-4">
+        <input
+          type="text"
+          placeholder="Họ tên"
+          value={name}
+          onChange={(e) => setName(e.target.value)}
+          className="w-full border p-2 rounded"
+        />
+        <textarea
+          placeholder="Địa chỉ giao hàng"
+          value={address}
+          onChange={(e) => setAddress(e.target.value)}
+          className="w-full border p-2 rounded"
+        />
+        <select
+          value={payment}
+          onChange={(e) => setPayment(e.target.value)}
+          className="w-full border p-2 rounded"
+        >
+          <option value="cod">Thanh toán khi nhận hàng (COD)</option>
+          <option value="bank">Chuyển khoản ngân hàng</option>
+        </select>
+
+        {payment === 'bank' && (
+          <div className="border p-3 rounded bg-gray-100 text-sm">
+            <p><strong>Ngân hàng:</strong> MB Bank</p>
+            <p><strong>Chủ TK:</strong> Tran Van Xinh</p>
+            <p><strong>Số TK:</strong> 0123456789</p>
+            <p className="mt-2">Hoặc quét mã QR:</p>
+            <img src="/qr-bank.jpg" alt="QR Bank" className="w-32 mt-2" />
+          </div>
+        )}
+
+        <button
+          type="submit"
+          disabled={submitting}
+          className="bg-blue-600 text-white px-4 py-2 rounded hover:bg-blue-700 disabled:opacity-50"
+        >
+          {submitting ? 'Đang xử lý...' : 'Xác nhận đặt hàng'}
+        </button>
+      </form>
+    </div>
+  );
+};
+
 export default Checkout;
