@@ -6,6 +6,7 @@ import ScrollToTopButton from '@/components/ScrollToTopButton';
 import FakePurchasePopup from '@/components/FakePurchasePopup';
 
 <Layout>
+  <OfflineWarning />
   <MiniGameCoupon />
   <ScrollToTopButton />
   <FakePurchasePopup />
