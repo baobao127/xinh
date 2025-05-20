@@ -1,6 +1,23 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 
+const OrderStatus = () => {
+  const status = localStorage.getItem('orderStatus') || 'processing';
+
+  const labelMap: any = {
+    processing: 'Đang xử lý',
+    confirming: 'Chờ xác nhận chuyển khoản',
+    shipping: 'Đang giao hàng',
+    delivered: 'Đã giao',
+    canceled: 'Đã huỷ'
+  };
+
+  return (
+    <div className="mt-4 text-sm text-gray-700">
+      <strong>Trạng thái đơn hàng:</strong> {labelMap[status] || 'Không rõ'}
+    </div>
+  );
+}:
 const Success: React.FC = () => {
   return (
     <div className="max-w-xl mx-auto text-center py-10 px-4">
@@ -19,5 +36,7 @@ const Success: React.FC = () => {
     </div>
   );
 };
+
+<OrderStatus />
 
 export default Success;
