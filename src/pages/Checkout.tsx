@@ -1,6 +1,30 @@
 
 import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
+import { Link } from 'react-router-dom';
+
+const Success: React.FC = () => {
+  const [status, setStatus] = useState('Đang xử lý đơn hàng...');
+
+  useEffect(() => {
+    const orderStatus = localStorage.getItem('orderStatus') || 'processing';
+    if (orderStatus === 'waitingBank') {
+      setStatus('Đang chờ thanh toán chuyển khoản');
+    } else if (orderStatus === 'processing') {
+      setStatus('Đơn hàng đang được xử lý');
+    } else {
+      setStatus('Đơn hàng đã được ghi nhận');
+    }
+  }, []);
+
+  return (
+    <div className="max-w-md mx-auto p-6 text-center">
+      <h1 className="text-3xl font-bold mb-4">Đặt hàng thành công!</h1>
+      <p className="text-gray-700 mb-4">{status}</p>
+      <Link to="/" className="text-blue-600 underline">Về trang chủ</Link>
+    </div>
+  );
+};
 
 const Checkout: React.FC = () => {
   const [name, setName] = useState('');
