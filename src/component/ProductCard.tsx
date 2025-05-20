@@ -1,5 +1,13 @@
 import React from 'react';
 
+const imgRef = useRef(null);
+
+return (
+  <div>
+    <img ref={imgRef} src={product.image} className="..." />
+    <AddToCartEffect imgRef={imgRef} onAnimationEnd={() => addToCart(product)} />
+  </div>
+);
 const ProductCard = ({ product, onQuickView }: { product: any; onQuickView: () => void }) => {
   return (
     <div className="border rounded p-2 hover:shadow transition relative">
