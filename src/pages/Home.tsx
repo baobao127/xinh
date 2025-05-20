@@ -5,6 +5,7 @@ import { Link } from 'react-router-dom';
 import QuickViewModal from '@/components/QuickViewModal';
 import ProductCard from '@/components/ProductCard';
 import SpinToWin from '@/components/SpinToWin';
+import MiniGameWheel from '@/components/MiniGameWheel';
 
 const Home: React.FC = () => {
   const [products, setProducts] = useState<any[]>([]);
@@ -12,9 +13,11 @@ const Home: React.FC = () => {
   const [quickProduct, setQuickProduct] = useState<any | null>(null);
   const [showSpin, setShowSpin] = useState(false);
   {showSpin && <SpinToWin />}
-<button onClick={() => setShowSpin(true)} className="text-sm text-red-500 underline">
+<button 
+  onClick={() => setShowSpin(true)} className="text-sm text-red-500 underline">
   Thử vận may nhận mã giảm giá
 </button>
+  <MiniGameWheel />
 
   useEffect(() => {
     fetchProducts().then((data) => {
