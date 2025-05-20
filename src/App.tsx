@@ -4,7 +4,16 @@ import { useToast } from '@/hooks/use-toast';
 import MiniGameCoupon from '@/components/MiniGameCoupon';
 import ScrollToTopButton from '@/components/ScrollToTopButton';
 import FakePurchasePopup from '@/components/FakePurchasePopup';
+import { Toaster } from 'react-hot-toast';
 
+function App() {
+  return (
+    <>
+      <AppRoutes />
+      <Toaster position="top-right" />
+    </>
+  );
+}
 <Layout>
   <OfflineWarning />
   <MiniGameCoupon />
