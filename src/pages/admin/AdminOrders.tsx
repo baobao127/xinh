@@ -1,5 +1,51 @@
 import React, { useEffect, useState } from 'react';
 
+
+const AdminOrders: React.FC = () => {
+  const [orders, setOrders] = useState<any[]>([]);
+
+  useEffect(() => {
+    const data = JSON.parse(localStorage.getItem('orders') || '[]');
+    setOrders(data);
+  }, []);
+
+  const updateStatus = (id: number, status: string) => {
+    const newOrders = orders.map((order) =>
+      order.id === id ? { ...order, status } : order
+    );
+    setOrders(newOrders);
+    localStorage.setItem('orders', JSON.stringify(newOrders));
+  };
+
+  return (
+    <div className="p-4 max-w-3xl mx-auto">
+      <h2 className="text-xl font-bold mb-4">Quản lý đơn hàng</h2>
+      {orders.length === 0 && <p>Chưa có đơn hàng nào.</p>}
+
+      {orders.map((order) => (
+        <div key={order.id} className="border rounded p-4 mb-4">
+          <p><strong>Khách:</strong> {order.name}</p>
+          <p><strong>Địa chỉ:</strong> {order.address}</p>
+          <p><strong>Thanh toán:</strong> {order.paymentMethod}</p>
+          <p><strong>Trạng thái:</strong> {order.status}</p>
+          <select
+            value={order.status}
+            onChange={(e) => updateStatus(order.id, e.target.value)}
+            className="mt-2 border p-1 rounded"
+          >
+            <option value="processing">Đang xử lý</option>
+            <option value="waitingBank">Chờ chuyển khoản</option>
+            <option value="shipping">Đang giao</option>
+            <option value="delivered">Đã giao</option>
+            <option value="cancelled">Đã hủy</option>
+          </select>
+        </div>
+      ))}
+    </div>
+  );
+};
+
+
 const AdminOrders: React.FC = () => {
   const [orders, setOrders] = useState<any[]>([]);
 
