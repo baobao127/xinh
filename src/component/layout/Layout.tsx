@@ -39,6 +39,7 @@ const Layout: React.FC = () => {
       <PopupNotifier />
       <ScrollToTopButton />
       <FakePurchasePopup />
+      <OfflineWarning />
     </>
   );
 };
