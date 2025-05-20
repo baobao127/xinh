@@ -7,3 +7,6 @@ const [view, setView] = useState('grid');
     <div className="border p-2">{p.name}</div>
   ))}
 </div>
+  {loading
+  ? Array.from({ length: 8 }).map((_, i) => <SkeletonProduct key={i} />)
+  : products.map(...) }
