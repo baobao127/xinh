@@ -1,5 +1,19 @@
 import { useState } from 'react';
 import React from 'react';
+import { useState } from 'react';
+
+export const useToast = () => {
+  const [message, setMessage] = useState('');
+  const [visible, setVisible] = useState(false);
+
+  const showToast = (msg: string, duration = 2000) => {
+    setMessage(msg);
+    setVisible(true);
+    setTimeout(() => setVisible(false), duration);
+  };
+
+  return { message, visible, showToast };
+};
 
 const PopupToast = ({ message, visible }: { message: string, visible: boolean }) => {
   if (!visible) return null;
