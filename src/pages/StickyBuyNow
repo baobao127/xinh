@@ -1,0 +1,14 @@
+import React from 'react';
+
+const StickyBuyNow = ({ onBuy }: { onBuy: () => void }) => (
+  <div className="fixed bottom-0 left-0 w-full p-2 bg-white shadow-md border-t z-50 md:hidden">
+    <button
+      onClick={onBuy}
+      className="w-full bg-black text-white py-3 rounded text-center font-bold"
+    >
+      Mua ngay
+    </button>
+  </div>
+);
+
+export default StickyBuyNow;
