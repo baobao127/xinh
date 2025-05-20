@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
 import { useCart } from '@/context/CartContext';
 import { fetchProducts } from '@/lib/fakeApi';
-
+<StickyBuyNow onBuy={() => showToast('Đã thêm vào giỏ hàng')} />
 const ProductDetail: React.FC = () => {
   const { id } = useParams<{ id: string }>();
   const navigate = useNavigate();
