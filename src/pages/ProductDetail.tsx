@@ -35,6 +35,7 @@ const ProductDetail: React.FC = () => {
       <p className="text-lg font-semibold mb-4">{product.price} đ</p>
       <button onClick={handleAdd} className="bg-black text-white px-4 py-2 rounded">
         Thêm vào giỏ
+      <RelatedProducts currentProductId={product.id} category={product.category} />
       </button>
     </div>
   );
