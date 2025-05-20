@@ -25,4 +25,31 @@ const ScrollToTopButton: React.FC = () => {
   ); null;
 };
 
+
+const ScrollToTopButton = () => {
+  const [visible, setVisible] = useState(false);
+
+  useEffect(() => {
+    const toggleVisible = () => {
+      setVisible(window.scrollY > 300);
+    };
+    window.addEventListener('scroll', toggleVisible);
+    return () => window.removeEventListener('scroll', toggleVisible);
+  }, []);
+
+  const scrollToTop = () => window.scrollTo({ top: 0, behavior: 'smooth' });
+
+  return (
+    visible && (
+      <button
+        onClick={scrollToTop}
+        className="fixed bottom-6 right-6 bg-black text-white p-3 rounded-full shadow hover:bg-gray-800 transition z-50"
+      >
+        ↑
+      </button>
+    )
+  );
+};
+
+
 export default ScrollToTopButton;
