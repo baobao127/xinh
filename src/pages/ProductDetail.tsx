@@ -8,6 +8,9 @@ const ProductDetail: React.FC = () => {
   const navigate = useNavigate();
   const { addToCart } = useCart();
   const [product, setProduct] = useState<any>(null);
+  const related = products
+  .filter(p => p.category === product.category && p.id !== product.id)
+  .slice(0, 4);
 
   useEffect(() => {
     fetchProducts().then((data) => {
