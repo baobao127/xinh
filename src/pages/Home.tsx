@@ -2,10 +2,13 @@ import React, { useEffect, useState } from 'react';
 import { fetchProducts } from '@/lib/fakeApi';
 import SkeletonProduct from '@/components/SkeletonProduct';
 import { Link } from 'react-router-dom';
+import QuickViewModal from '@/components/QuickViewModal';
+import ProductCard from '@/components/ProductCard';
 
 const Home: React.FC = () => {
   const [products, setProducts] = useState<any[]>([]);
   const [loading, setLoading] = useState(true);
+  const [quickProduct, setQuickProduct] = useState<any | null>(null);
 
   useEffect(() => {
     fetchProducts().then((data) => {
@@ -28,13 +31,14 @@ const Home: React.FC = () => {
         {loading
           ? Array.from({ length: 8 }).map((_, i) => <SkeletonProduct key={i} />)
           : products.map((p) => (
-              <Link to={`/product/${p.id}`} key={p.id} className="border rounded p-2 hover:shadow transition block">
-                <img src={p.image} className="w-full h-32 object-cover mb-2 rounded" alt={p.name} />
-                <h3 className="text-sm font-semibold">{p.name}</h3>
-                <p className="text-xs text-gray-500">{p.price.toLocaleString()} đ</p>
-              </Link>
+              <ProductCard key={p.id} product={p} onQuickView={() => setQuickProduct(p)} />
             ))}
       </div>
+
+      {/* Modal xem nhanh */}
+      {quickProduct && (
+        <QuickViewModal product={quickProduct} onClose={() => setQuickProduct(null)} />
+      )}
     </div>
   );
 };
