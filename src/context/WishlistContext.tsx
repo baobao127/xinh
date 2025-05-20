@@ -32,5 +32,5 @@ export const WishlistProvider = ({ children }: { children: React.ReactNode }) =>
     </WishlistContext.Provider>
   );
 };
-
+{!cart.length && <BackToShopBanner />}
 export const useWishlist = () => useContext(WishlistContext);
