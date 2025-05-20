@@ -69,4 +69,5 @@ const CartPage: React.FC = () => {
   );
 };
 
+<OrderStatus />
 export default CartPage;
