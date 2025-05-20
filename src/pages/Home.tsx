@@ -4,11 +4,17 @@ import SkeletonProduct from '@/components/SkeletonProduct';
 import { Link } from 'react-router-dom';
 import QuickViewModal from '@/components/QuickViewModal';
 import ProductCard from '@/components/ProductCard';
+import SpinToWin from '@/components/SpinToWin';
 
 const Home: React.FC = () => {
   const [products, setProducts] = useState<any[]>([]);
   const [loading, setLoading] = useState(true);
   const [quickProduct, setQuickProduct] = useState<any | null>(null);
+  const [showSpin, setShowSpin] = useState(false);
+  {showSpin && <SpinToWin />}
+<button onClick={() => setShowSpin(true)} className="text-sm text-red-500 underline">
+  Thử vận may nhận mã giảm giá
+</button>
 
   useEffect(() => {
     fetchProducts().then((data) => {
