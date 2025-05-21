@@ -19,22 +19,15 @@ const OrderStatus = () => {
   );
 }:
 
-
 const Success: React.FC = () => {
-  const [status, setStatus] = useState('Đang xử lý');
-
-  useEffect(() => {
-    const s = localStorage.getItem('orderStatus') || 'processing';
-    if (s === 'waitingBank') setStatus('Chờ chuyển khoản');
-    else if (s === 'processing') setStatus('Đang xử lý đơn hàng');
-    else setStatus('Đơn hàng đã được ghi nhận');
-  }, []);
-
   return (
-    <div className="max-w-md mx-auto p-6 text-center">
-      <h1 className="text-3xl font-bold mb-4">Cảm ơn bạn đã đặt hàng!</h1>
-      <p className="text-gray-700 mb-4">Trạng thái: {status}</p>
-      <Link to="/my-orders" className="text-blue-600 underline">Xem đơn hàng</Link>
+    <div className="text-center p-8">
+      <h2 className="text-3xl font-bold mb-4 text-green-600">Đặt hàng thành công!</h2>
+      <p className="mb-4">Cảm ơn bạn đã mua sắm tại Xinh Style.</p>
+      <p className="mb-4">Chúng tôi sẽ liên hệ để xác nhận đơn hàng sớm nhất.</p>
+      <Link to="/my-orders" className="text-blue-600 underline">
+        Xem đơn hàng của bạn
+      </Link>
     </div>
   );
 };
