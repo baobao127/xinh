@@ -2,7 +2,7 @@ import React from 'react';
 import { useCart } from '@/context/CartContext';
 import { Link } from 'react-router-dom';
 const { message, visible, showToast } = useToast();
-
+import SecretCodeInput from '@/components/SecretCodeInput';
 ...
 
 <button onClick={() => showToast('Đã thêm vào giỏ hàng!')}>
@@ -67,6 +67,8 @@ const CartPage: React.FC = () => {
       <div className="mt-6 text-right font-bold">
         Tổng cộng: {total.toLocaleString()} đ
       </div>
+
+      <SecretCodeInput />
 
       <div className="mt-4 text-right">
         <Link to="/checkout" className="bg-black text-white px-4 py-2 rounded">
