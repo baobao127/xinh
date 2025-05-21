@@ -1,55 +1,30 @@
-import React, { useEffect, useState } from 'react';
-import { ChevronUp } from 'lucide-react';
+import { useEffect, useState } from 'react';
+import { FaArrowCircleUp } from 'react-icons/fa';
 
 const ScrollToTopButton: React.FC = () => {
-  const [show, setShow, visible] = useState(false);
+  const [show, setShow] = useState(false);
+  const [visible, setVisible] = useState(false); // giữ nguyên visible
 
   useEffect(() => {
-    const onScroll = () => setShow(window.scrollY > 300);
-    window.addEventListener('scroll', onScroll);
-    return () => window.removeEventListener('scroll', onScroll);
+    const handleScroll = () => {
+      const shouldShow = window.scrollY > 200;
+      setShow(shouldShow);
+      setVisible(shouldShow); // giữ visible cho bạn dùng trong return
+    };
+
+    window.addEventListener('scroll', handleScroll);
+    return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
-  const scrollToTop = () => window.scrollTo({ top: 0, behavior: 'smooth' });
-
-  if (!show) return null;
-
-  return visible ?(
+  return visible ? (
     <button
       onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}
       title="Lên đầu trang"
-      className="fixed bottom-5 right-5 bg-black text-white p-3 rounded-full shadow hover:bg-gray-800 z-50"
+      className="fixed bottom-6 right-6 z-50 cursor-pointer text-[28px] text-pink-500 hover:text-pink-600"
     >
-      <ChevronUp size={20} />
+      <FaArrowCircleUp />
     </button>
-  ); null;
+  ) : null;
 };
-
-
-const ScrollToTopButton = () => {
-  const [visible, setVisible] = useState(false);
-
-  useEffect(() => {
-    const toggleVisible = () => {
-      setVisible(window.scrollY > 300);
-    };
-    window.addEventListener('scroll', toggleVisible);
-    return () => window.removeEventListener('scroll', toggleVisible);
-  }, []);
-
-  const scrollToTop = () => window.scrollTo({ top: 0, behavior: 'smooth' });
-
-  return (
-    visible && (
-      <button
-        onClick={scrollToTop}
-        className="fixed bottom-6 right-6 bg-black text-white p-3 rounded-full shadow hover:bg-gray-800 transition z-50"
-      >
-        ↑
-      </button>
-    )
-  );
-};
-
 
 export default ScrollToTopButton;
