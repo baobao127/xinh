@@ -1,18 +1,22 @@
-import React, { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 
 interface ToastProps {
   message: string;
-  onClose: () => void;
+  duration?: number;
 }
 
-const Toast: React.FC<ToastProps> = ({ message, onClose }) => {
+const Toast: React.FC<ToastProps> = ({ message, duration = 3000 }) => {
+  const [visible, setVisible] = useState(true);
+
   useEffect(() => {
-    const timer = setTimeout(onClose, 3000); // Tự biến mất sau 3s
+    const timer = setTimeout(() => setVisible(false), duration);
     return () => clearTimeout(timer);
-  }, []);
+  }, [duration]);
+
+  if (!visible) return null;
 
   return (
-    <div className="fixed bottom-4 right-4 bg-black text-white px-4 py-2 rounded shadow z-50 text-sm animate-fadeIn">
+    <div className="fixed bottom-6 left-1/2 z-50 -translate-x-1/2 transform rounded bg-pink-500 px-4 py-2 text-white shadow-md">
       {message}
     </div>
   );
