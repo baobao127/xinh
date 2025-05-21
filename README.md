@@ -29,3 +29,7 @@ src/
 ├── routes/            # AppRoutes.tsx
 ├── App.tsx           
 ├── main.tsx
+
+
+npm install
+npm run dev
