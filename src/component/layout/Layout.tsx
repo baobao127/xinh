@@ -1,45 +1,28 @@
 import React from 'react';
-import Header from './Header';
-import Footer from './Footer';
 import { Outlet } from 'react-router-dom';
-import PopupNotifier from '@/components/PopupNotifier';
-import ScrollToTopButton from '@/components/ScrollToTopButton';
-import { useEffect, useState } from 'react';
 
-const Header = () => {
-  const [show, setShow] = useState(true);
-  let lastScroll = 0;
-
-  useEffect(() => {
-    const handleScroll = () => {
-      const currScroll = window.scrollY;
-      setShow(currScroll < lastScroll || currScroll < 10);
-      lastScroll = currScroll;
-    };
-
-    window.addEventListener('scroll', handleScroll);
-    return () => window.removeEventListener('scroll', handleScroll);
-  }, []);
-
-  return (
-    <header className={`fixed top-0 left-0 w-full bg-white z-50 transition-transform duration-300 ${show ? 'translate-y-0' : '-translate-y-full'}`}>
-      <div className="p-4 shadow">XinhStyle</div>
-    </header>
-  );
-};
+import Header from '@/component/layout/Header';
+import Footer from '@/component/layout/Footer';
+import Toast from '@/component/Popup/Toast';
+import DiscountPopup from '@/component/Popup/DiscountPopup';
+import FakePurchasePopup from '@/component/Popup/FakePurchasePopup';
+import PopupNotifier from '@/component/Popup/PopupNotifier';
+import ScrollToTopButton from '@/component/common/ScrollToTopButton';
 
 const Layout: React.FC = () => {
   return (
     <>
       <Header />
-      <main className="min-h-[70vh] px-4 py-6">
+      <main className="min-h-screen pt-16 pb-20 px-4">
         <Outlet />
       </main>
       <Footer />
-      <PopupNotifier />
-      <ScrollToTopButton />
+
+      {/* Popup hiệu ứng */}
+      <Toast />
+      <DiscountPopup />
       <FakePurchasePopup />
-      <OfflineWarning />
+      <PopupNotifier />
       <ScrollToTopButton />
     </>
   );
