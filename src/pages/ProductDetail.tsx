@@ -2,46 +2,36 @@ import React, { useEffect, useState } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
 import { useCart } from '@/context/CartContext';
 import { fetchProducts } from '@/lib/fakeApi';
-<StickyBuyNow onBuy={() => showToast('Đã thêm vào giỏ hàng')} />
+import { useErrorBoundary } from '@/hooks/useErrorBoundary';
+import Toast from '@/components/common/Toast';
+
 const ProductDetail: React.FC = () => {
-  const { id } = useParams<{ id: string }>();
-  const navigate = useNavigate();
-  const { addToCart } = useCart();
+  const { id } = useParams();
   const [product, setProduct] = useState<any>(null);
-  const related = products
-  .filter(p => p.category === product.category && p.id !== product.id)
-  .slice(0, 4);
+  const { error, catchError } = useErrorBoundary();
 
   useEffect(() => {
-    fetchProducts().then((data) => {
-      const found = data.find((item: any) => String(item.id) === id);
-      if (!found) {
-        navigate('/'); // fallback nếu ko tìm thấy
-      } else {
+    fetchProducts()
+      .then((data) => {
+        const found = data.find((p: any) => String(p.id) === id);
+        if (!found) throw new Error('Không tìm thấy sản phẩm');
         setProduct(found);
-      }
-    });
+      })
+      .catch(catchError);
   }, [id]);
 
-  if (!product) return <p className="p-4 text-center">Đang tải sản phẩm...</p>;
+  if (error) return <Toast message={error} type="error" />;
 
-  const handleAdd = () => {
-    addToCart({ ...product, quantity: 1 });
-    alert('Đã thêm vào giỏ!');
-  };
+  if (!product) return <div className="p-4">Đang tải chi tiết sản phẩm...</div>;
 
   return (
-    <div className="p-4 max-w-2xl mx-auto">
-      <img src={product.image} alt={product.name} className="w-full h-64 object-cover rounded mb-4" />
+    <div className="p-4">
+      <img src={product.image} alt={product.name} className="w-full h-64 object-cover mb-4 rounded" />
       <h2 className="text-2xl font-bold">{product.name}</h2>
-      <p className="text-gray-600 mb-2">{product.description || 'Không có mô tả'}</p>
-      <p className="text-lg font-semibold mb-4">{product.price} đ</p>
-      <button onClick={handleAdd} className="bg-black text-white px-4 py-2 rounded">
-        Thêm vào giỏ
-      <RelatedProducts currentProductId={product.id} category={product.category} />
-      </button>
+      <p className="text-gray-600">{product.description}</p>
+      <p className="text-lg text-red-500 font-semibold mt-2">{product.price} đ</p>
     </div>
   );
 };
 
-export default ProductDetail;
+export default ProductDetail;;
