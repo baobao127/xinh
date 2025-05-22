@@ -21,6 +21,8 @@ import Settings from '@/pages/admin/Settings';
 import AdminSettings from '@/pages/admin/AdminSettings';
 import UnlockAdmin from '@/components/UnlockAdmin';
 import DiscountUnlock from '@/pages/DiscountUnlock';
+import ProductCard from '@/component/product/ProductCard';
+import { Toast, DiscountPopup } from '@/component/popup/ToastManager';
 
 const AppRoutes: React.FC = () => {
   return (
