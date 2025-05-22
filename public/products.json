@@ -1,14 +1,74 @@
 [
   {
-    "name": "Đầm ôm body ngắn tay",
-    "price": 220000
+    "id": 1,
+    "name": "Đầm xòe công chúa",
+    "price": 290000,
+    "image": "/images/dam1.jpg",
+    "category": "dam",
+    "badges": ["hot", "sale"],
+    "variants": ["Hồng", "Trắng", "Be"]
   },
   {
-    "name": "Áo thun form rộng Local Brand",
-    "price": 180000
+    "id": 2,
+    "name": "Áo croptop ôm body",
+    "price": 180000,
+    "image": "/images/ao1.jpg",
+    "category": "ao",
+    "badges": ["mới"],
+    "variants": ["Đen", "Xanh mint"]
   },
   {
-    "name": "Quần ống suông lưng cao",
-    "price": 250000
+    "id": 3,
+    "name": "Chân váy chữ A kèm belt",
+    "price": 210000,
+    "image": "/images/vay1.jpg",
+    "category": "chanvay",
+    "badges": [],
+    "variants": ["Nâu", "Đen", "Trắng"]
+  },
+  {
+    "id": 4,
+    "name": "Áo sơ mi voan tay dài",
+    "price": 230000,
+    "image": "/images/somi1.jpg",
+    "category": "ao",
+    "badges": ["hot"],
+    "variants": ["Trắng", "Kem"]
+  },
+  {
+    "id": 5,
+    "name": "Set bộ vest ngắn",
+    "price": 350000,
+    "image": "/images/set1.jpg",
+    "category": "set",
+    "badges": ["sale"],
+    "variants": ["Hồng", "Be"]
+  },
+  {
+    "id": 6,
+    "name": "Đầm maxi đi biển",
+    "price": 320000,
+    "image": "/images/dam2.jpg",
+    "category": "dam",
+    "badges": ["mới"],
+    "variants": ["Hoa nhí", "Trắng", "Cam"]
+  },
+  {
+    "id": 7,
+    "name": "Quần jean lưng cao",
+    "price": 250000,
+    "image": "/images/quan1.jpg",
+    "category": "quan",
+    "badges": [],
+    "variants": ["Xanh nhạt", "Xanh đậm"]
+  },
+  {
+    "id": 8,
+    "name": "Áo hoodie form rộng",
+    "price": 270000,
+    "image": "/images/hoodie1.jpg",
+    "category": "ao",
+    "badges": ["hot"],
+    "variants": ["Đen", "Xám", "Be"]
   }
-]
+    ]
