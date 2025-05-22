@@ -1,5 +1,14 @@
 import React, { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
+import OrderSuccessToast from '@/component/Popup/OrderSuccessToast';
+
+const [showToast, setShowToast] = useState(true);
+useEffect(() => {
+  const timer = setTimeout(() => setShowToast(false), 3000);
+  return () => clearTimeout(timer);
+}, []);
+
+<OrderSuccessToast show={showToast} />
 
 const OrderStatus = () => {
   const status = localStorage.getItem('orderStatus') || 'processing';
