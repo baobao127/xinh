@@ -1,0 +1,1 @@
+export default function ScrollToTopButton() { return <div>ScrollToTopButton component</div>; }

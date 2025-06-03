@@ -1,0 +1,1 @@
+export default function AddToCartEffect() { return <div>AddToCartEffect component</div>; }

@@ -1,0 +1,1 @@
+export default function SkeletonProduct() { return <div>SkeletonProduct component</div>; }

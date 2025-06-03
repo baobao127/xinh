@@ -1,0 +1,1 @@
+export default function PopupNotifier() { return <div>PopupNotifier component</div>; }
